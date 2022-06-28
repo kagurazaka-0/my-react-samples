@@ -1,14 +1,36 @@
 import React, { Suspense } from "react"
 import ReactDOM from "react-dom/client"
-import { BrowserRouter, useRoutes } from "react-router-dom"
+import { BrowserRouter, RouteObject, useRoutes, Link } from "react-router-dom"
 
-import _routes from "~react-pages"
+import baseRoutes from "~react-pages"
 
-console.log(_routes)
+console.log(baseRoutes)
 
-const routes = [..._routes, {}]
+const routes = [
+  ...baseRoutes,
+  {
+    path: "/",
+    element: (
+      <div>
+        <h2>my-react-samples</h2>
+        <ul>
+          {baseRoutes.map(({ path }) => {
+            const title = path?.replace(/^\d{6}-/, "")
+            return (
+              <li>
+                <Link to={`/${path}`}>{title}</Link>
+              </li>
+            )
+          })}
+        </ul>
+      </div>
+    ),
+  } as RouteObject,
+]
 
-const App = () => <Suspense fallback={<p>Loading...</p>}>{useRoutes(routes)}</Suspense>
+const App = () => {
+  return <Suspense fallback={<p>Loading...</p>}>{useRoutes(routes)}</Suspense>
+}
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
