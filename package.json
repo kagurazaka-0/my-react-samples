@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc --noEmit && vite build",
+    "build-for-github-pages": "tsc --noEmit && vite build --mode build-for-github-pages",
     "preview": "vite preview"
   },
   "dependencies": {

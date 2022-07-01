@@ -4,8 +4,6 @@ import { BrowserRouter, RouteObject, useRoutes, Link } from "react-router-dom"
 
 import baseRoutes from "~react-pages"
 
-console.log(baseRoutes)
-
 const routes = [
   ...baseRoutes,
   {
@@ -17,7 +15,7 @@ const routes = [
           {baseRoutes.map(({ path }) => {
             const title = path?.replace(/^\d{6}-/, "")
             return (
-              <li>
+              <li key={path}>
                 <Link to={`/${path}`}>{title}</Link>
               </li>
             )
@@ -34,7 +32,7 @@ const App = () => {
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <BrowserRouter>
+    <BrowserRouter basename={import.meta.env.VITE_BASEURL}>
       <App />
     </BrowserRouter>
   </React.StrictMode>
