@@ -36,23 +36,21 @@ for await (const item of Deno.readDir(TARGET_PATH)) {
   pageInfos.push(pageInfo);
 }
 
-const markdownTableText = pageInfos
+const markdownTableValueText = pageInfos
   .map((it) => `|[${it.title}](${it.path})|${it.description}|`)
   .join("\n");
 
-const newMarkdownText = `
-## サンプル集
-
-|||
+const markdownTableText = `
+<!-- prettier-ignore -->
+|名称|概要|
 |-|-|
-${markdownTableText}
-
+${markdownTableValueText}
 `;
 
 const templateText = await Deno.readTextFile(TEMPLATE_README_PATH);
 await Deno.writeTextFile(
   README_PATH,
-  templateText.replace(REPLACE_TARGET, newMarkdownText),
+  templateText.replace(REPLACE_TARGET, markdownTableText),
 );
 await Deno.run({ cmd: `npx prettier --write ${README_PATH}`.split(" ") })
   .status();
