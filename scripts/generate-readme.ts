@@ -30,7 +30,7 @@ for await (const item of Deno.readDir(TARGET_PATH)) {
     .then((markdownText) => markdownText.split("\n")[2] ?? "")
     .catch(() => "");
 
-  const path = `${PAGE_URL}/samples/${item.name}/`;
+  const path = `${PAGE_URL}/${item.name}/`;
 
   const pageInfo = { title, description, path };
   logObject(pageInfo);
@@ -38,6 +38,7 @@ for await (const item of Deno.readDir(TARGET_PATH)) {
 }
 
 const markdownTableValueText = pageInfos
+  .reverse()
   .map((it) => `|[${it.title}](${it.path})|${it.description}|`)
   .join("\n");
 
