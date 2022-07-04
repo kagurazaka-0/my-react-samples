@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc --noEmit && vite build",
-    "build-for-github-pages": "tsc --noEmit && vite build --mode build-for-github-pages",
+    "build-for-github-pages": "tsc --noEmit && vite build --mode build-for-github-pages && cp ./dist/index.html ./dist/404.html",
     "preview": "vite preview",
     "generate-readme": "deno run -A ./scripts/generate-readme.ts"
   },
