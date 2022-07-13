@@ -49,10 +49,28 @@ const markdownTableText = `
 ${markdownTableValueText}
 `;
 
-const templateText = await Deno.readTextFile(TEMPLATE_README_PATH);
-await Deno.writeTextFile(
-  README_PATH,
-  templateText.replace(REPLACE_TARGET, markdownTableText),
-);
-await Deno.run({ cmd: `npx prettier --write ${README_PATH}`.split(" ") })
-  .status();
+
+
+await writeFromTemplateFile({
+  templatePath: TEMPLATE_README_PATH,
+  writePath: README_PATH,
+  searchText: REPLACE_TARGET,
+  replaceText: markdownTableText,
+});
+
+type Option = {
+  templatePath: string;
+  writePath: string;
+  searchText: string;
+  replaceText: string;
+};
+
+async function writeFromTemplateFile(option: Option) {
+  const templateText = await Deno.readTextFile(option.templatePath);
+  await Deno.writeTextFile(
+    option.writePath,
+    templateText.replace(option.searchText, option.replaceText),
+  );
+  await Deno.run({ cmd: `npx prettier --write ${option.writePath}`.split(" ") })
+    .status();
+}
