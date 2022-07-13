@@ -1,6 +1,7 @@
-import React, { Suspense } from "react"
+import React, { PropsWithChildren, Suspense } from "react"
 import ReactDOM from "react-dom/client"
 import { BrowserRouter, RouteObject, useRoutes, Link } from "react-router-dom"
+import { RecoilRoot } from "recoil"
 
 import baseRoutes from "~react-pages"
 
@@ -26,8 +27,16 @@ const routes = [
   } as RouteObject,
 ]
 
+const Contexts = ({ children }: PropsWithChildren) => {
+  return <RecoilRoot>{children}</RecoilRoot>
+}
+
 const App = () => {
-  return <Suspense fallback={<p>Loading...</p>}>{useRoutes(routes)}</Suspense>
+  return (
+    <Contexts>
+      <Suspense fallback={<p>Loading...</p>}>{useRoutes(routes)}</Suspense>
+    </Contexts>
+  )
 }
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
