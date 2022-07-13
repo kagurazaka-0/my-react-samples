@@ -10,19 +10,19 @@
     "generate-readme": "deno run -A ./scripts/generate-readme.ts"
   },
   "dependencies": {
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "react-router-dom": "^6.3.0"
   },
   "devDependencies": {
     "@trivago/prettier-plugin-sort-imports": "^3.2.0",
-    "@types/react": "^18.0.0",
-    "@types/react-dom": "^18.0.0",
-    "@vitejs/plugin-react": "^1.3.0",
-    "prettier": "^2.6.2",
+    "@types/react": "^18.0.15",
+    "@types/react-dom": "^18.0.6",
+    "@vitejs/plugin-react": "^2.0.0",
+    "prettier": "^2.7.1",
     "recoil": "^0.7.4",
-    "typescript": "^4.7.3",
-    "vite": "^2.9.9",
-    "vite-plugin-pages": "^0.24.2"
+    "typescript": "^4.7.4",
+    "vite": "^3.0.0",
+    "vite-plugin-pages": "^0.25.0"
   }
 }
