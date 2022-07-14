@@ -19,6 +19,7 @@ type PageInfo = {
   title: string;
   description: string;
   path: string;
+  readmeFilePath: string
 };
 const pageInfos: PageInfo[] = [];
 
@@ -31,15 +32,16 @@ for await (const item of Deno.readDir(TARGET_PATH)) {
     .catch(() => "");
 
   const path = `${PAGE_URL}/${item.name}/`;
+  const readmeFilePath = `./src/samples/${item.name}/README.md`;
 
-  const pageInfo = { title, description, path };
+  const pageInfo = { title, description, path,readmeFilePath };
   logObject(pageInfo);
   pageInfos.push(pageInfo);
 }
 
 const markdownTableValueText = pageInfos
   .reverse()
-  .map((it) => `|[${it.title}](${it.path})|${it.description}|`)
+  .map((it) => `|[${it.title}](${it.path}) [ℹ️](${it.readmeFilePath})|${it.description}|`)
   .join("\n");
 
 const markdownTableText = `

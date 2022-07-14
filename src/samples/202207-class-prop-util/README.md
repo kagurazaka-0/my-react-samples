@@ -1,8 +1,6 @@
 # class-prop-util
 
-jsx で`<Q.div class={["a", "b", "c", { isHoge: false, isFuga: true }]}>`のように書くためにを[clsx]を内包した util component を試しに実装
-
-[clsx]: https://github.com/lukeed/clsx
+jsx で`<Q.div class={["a", "b", "c", { isHoge: false, isFuga: true }]}>`のように書くために[clsx](https://github.com/lukeed/clsx)を内包した util component を試しに実装
 
 - `Q`である意味なあまりない(後に npm ライブラリ化することを考慮したとき、わかりやすいかつ印象的な名称をパッと思いついただけ)
 
