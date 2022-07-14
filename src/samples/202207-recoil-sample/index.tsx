@@ -1,6 +1,6 @@
 import React from "react"
 import { Link } from "react-router-dom"
-import { RecoilRoot, useRecoilValue } from "recoil"
+import { useRecoilValue } from "recoil"
 
 import { countState } from "./state/count"
 
@@ -13,7 +13,8 @@ export default function Page() {
       <p>countState = {count}</p>
       <ul>
         <li>
-          <Link to="./update-count">update-count</Link>
+          <Link to="./count">count</Link>
+          <Link to="./todo-list">todo-list</Link>
         </li>
       </ul>
     </div>

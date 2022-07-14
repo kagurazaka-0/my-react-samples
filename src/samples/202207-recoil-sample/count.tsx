@@ -9,7 +9,7 @@ export default function Page() {
 
   return (
     <div>
-      <h2>recoil-sample/update-count</h2>
+      <h2>recoil-sample/count</h2>
       <p>countState = {count}</p>
       <p>countPlus1State = {countPlus1}</p>
       <div style={{ display: "flex", gap: "8px" }}>
