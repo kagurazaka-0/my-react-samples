@@ -10,6 +10,7 @@
     "generate-readme": "deno run -A ./scripts/generate-readme.ts"
   },
   "dependencies": {
+    "clsx": "^1.2.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.33.1",
@@ -24,6 +25,7 @@
     "prettier": "^2.7.1",
     "typescript": "^4.7.4",
     "vite": "^3.0.0",
-    "vite-plugin-pages": "^0.25.0"
+    "vite-plugin-pages": "^0.25.0",
+    "vite-tsconfig-paths": "^3.5.0"
   }
 }
