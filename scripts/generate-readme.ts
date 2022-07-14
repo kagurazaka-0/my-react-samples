@@ -41,13 +41,13 @@ for await (const item of Deno.readDir(TARGET_PATH)) {
 
 const markdownTableValueText = pageInfos
   .reverse()
-  .map((it) => `|[${it.title}](${it.path}) [ℹ️](${it.readmeFilePath})|${it.description}|`)
+  .map((it) => `|[${it.title}](${it.path})|[ℹ️](${it.readmeFilePath})|${it.description}|`)
   .join("\n");
 
 const markdownTableText = `
 <!-- prettier-ignore -->
-|名称|概要|
-|-|-|
+|名称|詳細リンク|概要|
+|-|-|-|
 ${markdownTableValueText}
 `;
 
