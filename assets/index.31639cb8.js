@@ -1,0 +1,1 @@
+import{j as e}from"./index.598f80b2.js";var l="/home/runner/work/my-react-samples/my-react-samples/src/samples/202206-hello-vite-plugin-pages/index.tsx";function r(){return e("div",{children:e("h2",{children:"hello-vite-plugin-pages"},void 0,!1,{fileName:l,lineNumber:7,columnNumber:7},this)},void 0,!1,{fileName:l,lineNumber:6,columnNumber:5},this)}export{r as default};
