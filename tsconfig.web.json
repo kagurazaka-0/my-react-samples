@@ -1,5 +1,4 @@
 {
-  "extends": "./tsconfig.web.json",
   "compilerOptions": {
     "target": "ESNext",
     "useDefineForClassFields": true,
@@ -17,7 +16,7 @@
     "module": "ESNext",
     "moduleResolution": "Node",
     "resolveJsonModule": true,
-    "isolatedModules": false,
+    "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
     "noUncheckedIndexedAccess": true,
@@ -26,16 +25,13 @@
       "~/*": [
         "./*"
       ]
-    },
-    "types": [
-      "vitest/globals",
-      "@testing-library/react"
-    ]
+    }
   },
   "include": [
-    "src",
+    "src"
+  ],
+  "exclude": [
     "src/**/*.test.ts",
     "src/**/*.test.tsx",
   ],
-  "references": []
 }

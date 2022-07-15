@@ -4,8 +4,9 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",
-    "build": "tsc --noEmit && vite build",
-    "build-for-github-pages": "tsc --noEmit && vite build --mode build-for-github-pages && cp ./dist/index.html ./dist/404.html",
+    "build": " npm run type-check && vite build",
+    "build-for-github-pages": "npm run type-check && vite build --mode build-for-github-pages && cp ./dist/index.html ./dist/404.html",
+    "type-check": " tsc -p ./tsconfig.web.json --noEmit",
     "preview": "vite preview",
     "generate-readme": "deno run -A ./scripts/generate-readme.ts",
     "test": "vitest"

@@ -7,7 +7,9 @@ import tsconfigPaths from "vite-tsconfig-paths"
 export default defineConfig(({ command, mode }) => ({
   base: loadEnv(mode, "./").VITE_BASEURL,
   plugins: [
-    tsconfigPaths(),
+    tsconfigPaths({
+      projects: ["./tsconfig.web.json"],
+    }),
     react(),
     pages({
       dirs: "src/samples",
