@@ -3,7 +3,10 @@ import ReactDOM from "react-dom/client"
 import { BrowserRouter, RouteObject, useRoutes, Link } from "react-router-dom"
 import { RecoilRoot } from "recoil"
 
+import "~/init-tailwind.css"
 import baseRoutes from "~react-pages"
+
+import { Q } from "./_common/Q"
 
 const routes = [
   ...baseRoutes,
@@ -43,6 +46,19 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <BrowserRouter basename={import.meta.env.VITE_BASEURL}>
       <App />
+      <Q.div class="ds-modal ds-modal-open">
+        <Q.div class="ds-modal-box">
+          <Q.h3 class="font-bold text-lg">Congratulations random Internet user!</Q.h3>
+          <Q.p class="py-4">
+            You've been selected for a chance to get one year of subscription to use Wikipedia for free!
+          </Q.p>
+          <Q.div class="ds-modal-action">
+            <Q.label htmlFor="my-modal" class="ds-btn">
+              Yay!
+            </Q.label>
+          </Q.div>
+        </Q.div>
+      </Q.div>
     </BrowserRouter>
   </React.StrictMode>
 )
