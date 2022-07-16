@@ -39,8 +39,10 @@ export const Q: QType = new Proxy({} as QType, {
     const maybeCached = CACHED_Q.get(propKey)
     if (maybeCached) return maybeCached
 
-    const Component: FunctionComponent = (props: PropsWithClass<{}>) => {
-      const className = props.class ? clsx(props.class) : undefined
+    // NOTE: propsからclassを除外しないと以下のreactの警告が発生
+    // "Warning: Invalid DOM property `class`. Did you mean `className`?"
+    const Component: FunctionComponent = ({ class: classProp, ...props }: PropsWithClass<{}>) => {
+      const className = classProp ? clsx(classProp) : undefined
       return createElement(propKey, { ...props, className })
     }
     Component.displayName = `Q.${propKey}`
