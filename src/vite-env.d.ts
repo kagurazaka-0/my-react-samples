@@ -6,3 +6,5 @@
 interface ImportMetaEnv {
   VITE_BASEURL: string
 }
+
+declare const IS_DEV: boolean

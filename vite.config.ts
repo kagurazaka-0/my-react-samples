@@ -20,4 +20,7 @@ export default defineConfig(({ command, mode }) => ({
       jsx: "react",
     }),
   ],
+  define: {
+    IS_DEV: command === "serve",
+  },
 }))
