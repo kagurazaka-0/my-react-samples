@@ -1,4 +1,7 @@
 const daisy = require("daisyui")
+
+const { COLORS } = require("./src/_common/daisyui/color.json")
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ["./src/**/*.tsx", "*.html"],
@@ -8,7 +11,7 @@ module.exports = {
   plugins: [daisy],
   daisyui: {
     styled: true,
-    themes: true,
+    themes: COLORS,
     base: true,
     utils: true,
     logs: true,
