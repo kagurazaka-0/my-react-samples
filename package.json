@@ -9,10 +9,12 @@
     "type-check": " tsc -p ./tsconfig.web.json --noEmit",
     "preview": "vite preview",
     "generate-readme": "deno run -A ./scripts/generate-readme.ts",
-    "test": "vitest"
+    "test": "vitest",
+    "tailwind-config-viewer": "tailwind-config-viewer"
   },
   "dependencies": {
     "clsx": "^1.2.1",
+    "jotai": "^1.7.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.33.1",
@@ -20,13 +22,22 @@
     "recoil": "^0.7.4"
   },
   "devDependencies": {
+    "@iconify/json": "^2.1.78",
+    "@svgr/core": "^6.2.1",
     "@testing-library/react": "^13.3.0",
     "@trivago/prettier-plugin-sort-imports": "^3.2.0",
     "@types/react": "^18.0.15",
     "@types/react-dom": "^18.0.6",
     "@vitejs/plugin-react": "^2.0.0",
+    "autoprefixer": "^10.4.7",
+    "daisyui": "^2.19.0",
+    "postcss": "^8.4.14",
     "prettier": "^2.7.1",
+    "prettier-plugin-tailwindcss": "^0.1.12",
+    "tailwind-config-viewer": "^1.7.1",
+    "tailwindcss": "^3.1.6",
     "typescript": "^4.7.4",
+    "unplugin-icons": "^0.14.7",
     "vite": "^3.0.0",
     "vite-plugin-pages": "^0.25.0",
     "vite-tsconfig-paths": "^3.5.0",

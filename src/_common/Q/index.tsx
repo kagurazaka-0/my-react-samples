@@ -1,5 +1,5 @@
 import clsx, { ClassValue } from "clsx"
-import { createElement, FunctionComponent, ReactElement } from "react"
+import { createElement, forwardRef, FunctionComponent, ReactElement } from "react"
 
 type PropsWithClass<Props> = Omit<Props, "className"> & {
   class?: Exclude<ClassValue, boolean>
@@ -39,10 +39,12 @@ export const Q: QType = new Proxy({} as QType, {
     const maybeCached = CACHED_Q.get(propKey)
     if (maybeCached) return maybeCached
 
-    const Component: FunctionComponent = (props: PropsWithClass<{}>) => {
-      const className = props.class ? clsx(props.class) : undefined
-      return createElement(propKey, { ...props, className })
-    }
+    // NOTE: propsからclassを除外しないと以下のreactの警告が発生
+    // "Warning: Invalid DOM property `class`. Did you mean `className`?"
+    const Component: FunctionComponent = forwardRef(({ class: classProp, ...props }: PropsWithClass<{}>, ref) => {
+      const className = classProp ? clsx(classProp) : undefined
+      return createElement(propKey, { ...props, className, ref })
+    })
     Component.displayName = `Q.${propKey}`
     CACHED_Q.set(propKey, Component)
     return Component
