@@ -1,5 +1,4 @@
 // thanks! https://github.com/chakra-ui/chakra-ui/blob/main/packages/hooks/src/use-boolean.ts
-
 import { useDebugValue, useMemo, useState } from "react"
 
 type InitialState = boolean | (() => boolean)
