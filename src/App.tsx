@@ -36,7 +36,7 @@ export const App = () => {
         <Q.div class="ds-drawer-content relative ">
           {/* ヘッダー */}
           <Q.div class="sticky top-4 left-0 m-4 mt-0">
-            <Q.div class="ds-navbar navbar bg-base-100 shadow-xl rounded-box bg-opacity-80 backdrop-blur ">
+            <Q.div class="ds-navbar navbar bg-base-100 shadow-xl rounded-box bg-opacity-60 backdrop-blur ">
               <Q.div class="flex-none">
                 <Q.label htmlFor="toggle-drawer" class="ds-btn ds-btn-square ds-btn-ghost">
                   <IconList className="w-6 h-6" />
