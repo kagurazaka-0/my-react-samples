@@ -1,6 +1,8 @@
-# my-react-samples
+<p align="center">
+<img src=".github/assets/readme-image-1.png" width="500" >
+</p>
 
-## サンプル集
+## サンプル一覧
 
 <!-- INSERT SAMPLES -->
 

@@ -19,12 +19,14 @@ type PageInfo = {
   title: string;
   description: string;
   path: string;
-  readmeFilePath: string
+  readmeFilePath: string;
 };
 const pageInfos: PageInfo[] = [];
 
 for await (const item of Deno.readDir(TARGET_PATH)) {
-  const title = item.name.replace(/^\d{6}-/, "");
+  if (item.name === "index.tsx") continue;
+
+  const title = item.name.replace(/^\d+-/, "");
 
   const markdownPath = join(TARGET_PATH, item.name, `README.md`);
   const description = await Deno.readTextFile(markdownPath)
@@ -34,14 +36,16 @@ for await (const item of Deno.readDir(TARGET_PATH)) {
   const path = `${PAGE_URL}/${item.name}/`;
   const readmeFilePath = `./src/samples/${item.name}/README.md`;
 
-  const pageInfo = { title, description, path,readmeFilePath };
+  const pageInfo = { title, description, path, readmeFilePath };
   logObject(pageInfo);
   pageInfos.push(pageInfo);
 }
 
 const markdownTableValueText = pageInfos
   .reverse()
-  .map((it) => `|[${it.title}](${it.path})|[ℹ️](${it.readmeFilePath})|${it.description}|`)
+  .map((it) =>
+    `|[${it.title}](${it.path})|[ℹ️](${it.readmeFilePath})|${it.description}|`
+  )
   .join("\n");
 
 const markdownTableText = `
@@ -50,8 +54,6 @@ const markdownTableText = `
 |-|-|-|
 ${markdownTableValueText}
 `;
-
-
 
 await writeFromTemplateFile({
   templatePath: TEMPLATE_README_PATH,
