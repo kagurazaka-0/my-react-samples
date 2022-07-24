@@ -1,6 +1,16 @@
+const plugin = require("tailwindcss/plugin")
 const daisy = require("daisyui")
 
 const { COLORS } = require("./src/_common/daisyui/color.json")
+
+const myPlugin = plugin(({ addUtilities }) => {
+  addUtilities({
+    ".center": {
+      display: "grid",
+      "place-items": "center",
+    },
+  })
+})
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -8,7 +18,7 @@ module.exports = {
   theme: {
     extend: {},
   },
-  plugins: [daisy],
+  plugins: [daisy, myPlugin],
   daisyui: {
     styled: true,
     themes: COLORS,
