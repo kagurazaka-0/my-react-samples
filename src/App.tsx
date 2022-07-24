@@ -90,7 +90,7 @@ export const App = () => {
                 <Q.span class="text-base-content">Samples</Q.span>
               </Q.span>
             </Q.div>
-            {/* <Q.label htmlFor="toggle-drawer" class="ds-drawer-overlay" /> */}
+
             <Q.ul class="ds-menu mt-2">
               {ROUTE_INFOS.map((routeInfo) => {
                 const isActive = routeInfo.isActive(routerLocation.pathname)
@@ -106,7 +106,7 @@ export const App = () => {
             </Q.ul>
           </Q.div>
         </Q.div>
-        {IS_DEV && <SettingModal />}
+        <SettingModal />
       </Q.div>
     </Contexts>
   )
