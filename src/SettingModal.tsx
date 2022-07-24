@@ -4,9 +4,8 @@ import IconSave from "~icons/ant-design/save-filled"
 import IconSetting from "~icons/ant-design/setting"
 
 import { Q } from "~/_common/Q"
-
-import { COLORS, useColorState } from "./_common/daisyui/color-state"
-import { useBoolean } from "./_common/hooks/useBoolean"
+import { COLORS, useColorState } from "~/_common/daisyui/color-state"
+import { useBoolean } from "~/_common/hooks/useBoolean"
 
 export function SettingModal() {
   const [isOpenModal, { on, off }] = useBoolean()
