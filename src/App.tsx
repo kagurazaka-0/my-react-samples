@@ -1,5 +1,5 @@
 import clsx from "clsx"
-import { lazy, PropsWithChildren, Suspense } from "react"
+import { PropsWithChildren, Suspense, useEffect, useRef } from "react"
 import { useLocation, useRoutes, Link } from "react-router-dom"
 import { RecoilRoot } from "recoil"
 
@@ -9,10 +9,11 @@ import IconReact from "~icons/simple-icons/react"
 import { Q } from "~/_common/Q"
 import routes from "~react-pages"
 
+import { SettingModal } from "./SettingModal"
 import { useColorStateValue } from "./_common/daisyui/color-state"
 import { useTitleState } from "./_common/title-state"
 
-const DevModal = lazy(() => import("./DevModal"))
+// const DevModal
 
 const ROUTE_INFOS = routes.map(({ path }) => {
   path = path ?? ""
@@ -89,7 +90,7 @@ export const App = () => {
             </Q.ul>
           </Q.div>
         </Q.div>
-        {IS_DEV && <DevModal />}
+        {IS_DEV && <SettingModal />}
       </Q.div>
     </Contexts>
   )

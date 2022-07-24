@@ -3,11 +3,12 @@ import { useForm } from "react-hook-form"
 import IconSave from "~icons/ant-design/save-filled"
 import IconSetting from "~icons/ant-design/setting"
 
-import { Q } from "./_common/Q"
+import { Q } from "~/_common/Q"
+
 import { COLORS, useColorState } from "./_common/daisyui/color-state"
 import { useBoolean } from "./_common/hooks/useBoolean"
 
-export default function DevModal() {
+export function SettingModal() {
   const [isOpenModal, { on, off }] = useBoolean()
 
   const [currentColor, setColor] = useColorState()
@@ -15,14 +16,11 @@ export default function DevModal() {
   type FormType = {
     color: string
   }
-  const { register, handleSubmit, reset, formState } = useForm<FormType>({
-    defaultValues: { color: currentColor },
-    mode: "onChange",
-  })
+  const { register, handleSubmit, reset, formState } = useForm<FormType>()
 
   const onClickOpen = () => {
     on()
-    reset()
+    reset({ color: currentColor })
   }
 
   const onSubmit = handleSubmit(({ color }) => {
