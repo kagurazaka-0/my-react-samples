@@ -41,17 +41,12 @@ const ROUTE_INFOS = routes
 
 export const App = () => {
   const routerLocation = useLocation()
-  const maybeCurrentLocation = useRef<typeof routerLocation>()
+
   const color = useColorStateValue()
   const [title, setTitle] = useTitleState()
 
   // ページ遷移時、タイトルを更新
   useEffect(() => {
-    if (routerLocation.pathname === maybeCurrentLocation.current?.pathname) {
-      return
-    }
-    maybeCurrentLocation.current = routerLocation
-
     const maybeTitle = ROUTE_INFOS.find((it) => it.isActive(routerLocation.pathname))?.title
     if (!maybeTitle) {
       console.warn('⚠️  maybeTitle is `"" | undefined`.', { maybeTitle })
@@ -59,7 +54,7 @@ export const App = () => {
     }
     setTitle(maybeTitle)
     document.title = `${maybeTitle} - my-react-app`
-  }, [routerLocation])
+  }, [routerLocation.pathname])
 
   return (
     <Contexts>
