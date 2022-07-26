@@ -2,20 +2,20 @@ const pluginSortImports = require("@trivago/prettier-plugin-sort-imports")
 const pluginTailwindcss = require("prettier-plugin-tailwindcss")
 
 /** @type {import("prettier").Parser}  */
-const hackParser = {
+const myParser = {
   ...pluginSortImports.parsers.typescript,
   parse: pluginTailwindcss.parsers.typescript.parse,
 }
 
 /** @type {import("prettier").Plugin}  */
-const hackedPlugin = {
+const myPlugin = {
   parsers: {
-    typescript: hackParser,
+    typescript: myParser,
   },
 }
 
 module.exports = {
-  plugins: [hackedPlugin],
+  plugins: [myPlugin],
   tabWidth: 2,
   semi: false,
   printWidth: 120,
