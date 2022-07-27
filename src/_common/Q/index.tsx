@@ -1,12 +1,18 @@
 import clsx, { ClassValue } from "clsx"
 import { createElement, forwardRef, FunctionComponent, ReactElement } from "react"
 
-type PropsWithClass<Props> = Omit<Props, "className"> & {
-  class?: Exclude<ClassValue, boolean>
+// TODO: できるだけclsxの型に依存しないように実装する
+
+export type ClassProp = Exclude<ClassValue, boolean>
+
+export type PropsWithClass = {
+  class?: ClassProp
 }
 
+type WithoutClassName<Props> = Omit<Props, "className"> & PropsWithClass
+
 type QType = {
-  [Key in keyof JSX.IntrinsicElements]: (props: PropsWithClass<JSX.IntrinsicElements[Key]>) => ReactElement
+  [Key in keyof JSX.IntrinsicElements]: (props: WithoutClassName<JSX.IntrinsicElements[Key]>) => ReactElement
 }
 
 type HTMLTag = keyof JSX.IntrinsicElements
@@ -41,7 +47,7 @@ export const Q: QType = new Proxy({} as QType, {
 
     // NOTE: propsからclassを除外しないと以下のreactの警告が発生
     // "Warning: Invalid DOM property `class`. Did you mean `className`?"
-    const Component: FunctionComponent = forwardRef(({ class: classProp, ...props }: PropsWithClass<{}>, ref) => {
+    const Component: FunctionComponent = forwardRef(({ class: classProp, ...props }: WithoutClassName<{}>, ref) => {
       const className = classProp ? clsx(classProp) : undefined
       return createElement(propKey, { ...props, className, ref })
     })

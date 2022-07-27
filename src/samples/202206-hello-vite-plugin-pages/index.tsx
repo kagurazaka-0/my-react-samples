@@ -1,5 +1,4 @@
 // https://github.com/hannoeru/vite-plugin-pages
-import React from "react"
 
 const LIST = Array.from({ length: 100 }, (_, i) => i)
 

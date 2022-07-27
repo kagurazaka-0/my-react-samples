@@ -1,4 +1,3 @@
-import React from "react"
 import { useRecoilState, useRecoilValue } from "recoil"
 
 import { countPlus1State, countState } from "./state/count"
