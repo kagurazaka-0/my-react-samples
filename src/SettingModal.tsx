@@ -2,10 +2,10 @@ import { useDebugValue, useEffect, useRef } from "react"
 import { useForm } from "react-hook-form"
 
 import IconClose from "~icons/ant-design/close-outlined"
-import IconInfo from "~icons/ant-design/info-circle"
 import IconSetting from "~icons/ant-design/setting"
 
 import { Q } from "~/_common/Q"
+import { Alert } from "~/_common/components/atoms/Alert"
 import { COLORS, useColorState } from "~/_common/daisyui/color-state"
 import { useBoolean } from "~/_common/hooks/useBoolean"
 
@@ -65,22 +65,11 @@ export function SettingModal() {
           <Q.div class="flex items-center text-lg font-bold">
             <IconSetting className="h-[1.4em] w-[1.4em]" />
             <Q.span class="ml-2">設定</Q.span>
-            <Q.div
-              class={[
-                "ds-alert ds-alert-success ds-alert-sm shadow-lg ml-4 w-fit transition duration-300",
-                !isSaved && "opacity-0 -translate-x-5",
-              ]}
-            >
-              <Q.div class="text-sm">
-                <IconInfo className="stroke-current flex-shrink-0 h-[1.4em] w-[1.4em]" />
-                <Q.span>保存しました</Q.span>
-                <Q.span class="ds-btn ds-btn-ghost ds-btn-sm ds-btn-square" onClick={setIsSavedFalse}>
-                  <IconClose />
-                </Q.span>
-              </Q.div>
-            </Q.div>
+            <Alert show={isSaved} class="ml-4 w-fit" onClose={setIsSavedFalse}>
+              保存しました
+            </Alert>
           </Q.div>
-          <Q.span class="ds-btn ds-btn-circle ds-btn-sm absolute right-4 top-4" onClick={onClickClose}>
+          <Q.span class="ds-btn ds-btn-ghost ds-btn-circle ds-btn-sm absolute right-4 top-4" onClick={onClickClose}>
             <IconClose />
           </Q.span>
           <Q.form class="ds-form-control py-4">
