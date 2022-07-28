@@ -5,8 +5,6 @@ import IconInfo from "~icons/ant-design/info-circle"
 
 import { PropsWithClass, Q } from "~/_common/Q"
 
-import "./"
-
 type Props = PropsWithClass &
   PropsWithChildren & {
     show?: boolean
