@@ -1,3 +1,4 @@
+import { capitalCase } from "change-case"
 import clsx from "clsx"
 import { PropsWithChildren, Suspense, useEffect } from "react"
 import { Link, useLocation, useRoutes } from "react-router-dom"
@@ -16,7 +17,7 @@ import { useTitleState } from "./_common/title-state"
 const ROUTE_INFOS = ROUTES.map(({ path }) => {
   path = path ?? ""
   /** 画面上部や左のドロワーに表示するタイトル */
-  const title = path === "/" ? "Welcome Page" : path.replace(/^\d+-/, "")
+  const title = path === "/" ? "Welcome Page" : capitalCase(path.replace(/^\d+-/, ""))
 
   const to = path.startsWith("/") ? path : `/${path}`
 
@@ -54,18 +55,21 @@ export const App = () => {
 
   return (
     <Contexts>
-      <Q.div data-theme={color} class="ds-drawer ds-drawer-mobile ">
+      <Q.div data-theme={color} class="ds-drawer">
         <Q.input id="toggle-drawer" type="checkbox" class="ds-drawer-toggle" />
         <Q.div class="ds-drawer-content relative ">
           {/* ヘッダー */}
           <Q.div class="sticky top-4 left-0 m-4 mt-0">
-            <Q.div class="ds-navbar rounded-box bg-base-100 bg-opacity-60 shadow-xl backdrop-blur lg:center">
-              <Q.div class="flex-none lg:hidden">
+            <Q.div class="ds-navbar rounded-box bg-base-100 bg-opacity-60 shadow-xl backdrop-blur">
+              <Q.div class="flex-none">
                 <Q.label htmlFor="toggle-drawer" class="ds-btn ds-btn-ghost ds-btn-square">
                   <IconList className="h-6 w-6" />
                 </Q.label>
               </Q.div>
-              <Q.div class="flex-1 text-center text-xl font-semibold">{title}</Q.div>
+              <Q.div class="flex-1" />
+              <Q.div class="text-center text-xl font-semibold">{title}</Q.div>
+              <Q.div class="flex-1" />
+              <Q.div class="flex-0 w-12" />
             </Q.div>
           </Q.div>
 
