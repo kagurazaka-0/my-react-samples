@@ -1,6 +1,7 @@
 import { capitalCase } from "change-case"
 import clsx from "clsx"
 import { PropsWithChildren, Suspense, useEffect } from "react"
+import { useForm } from "react-hook-form"
 import { Link, useLocation, useRoutes } from "react-router-dom"
 import { RecoilRoot } from "recoil"
 
@@ -36,11 +37,17 @@ const ROUTE_INFOS = ROUTES.map(({ path }) => {
   return a.to < b.to ? 1 : -1
 })
 
-export const App = () => {
+export function App() {
   const routerLocation = useLocation()
 
   const color = useColorStateValue()
   const [title, setTitle] = useTitleState()
+
+  const { register, setValue } = useForm<{ isOpenDrawer: boolean }>()
+
+  const onClickLink = () => {
+    setValue("isOpenDrawer", false)
+  }
 
   // ページ遷移時、タイトルを更新
   useEffect(() => {
@@ -56,7 +63,7 @@ export const App = () => {
   return (
     <Contexts>
       <Q.div data-theme={color} class="ds-drawer">
-        <Q.input id="toggle-drawer" type="checkbox" class="ds-drawer-toggle" />
+        <Q.input {...register("isOpenDrawer")} id="toggle-drawer" type="checkbox" class="ds-drawer-toggle" />
         <Q.div class="ds-drawer-content relative ">
           {/* ヘッダー */}
           <Q.div class="sticky top-4 left-0 m-4 mt-0">
@@ -79,7 +86,7 @@ export const App = () => {
           </Q.div>
         </Q.div>
         <Q.div class="ds-drawer-side">
-          {/* NOTE: スマホでdrawer表示時、右側に表示される薄いグレーのoverlay、onPress時labelの効果によりinputのチェックが外される */}
+          {/* NOTE: スマホでdrawer表示時、右側に表示される薄いグレーのoverlay、onClick時labelの効果によりinputのチェックが外される */}
           <Q.label htmlFor="toggle-drawer" class="ds-drawer-overlay" />
           <Q.div class="w-80 overflow-y-auto bg-base-200 p-4 text-base-content">
             <Q.div class="rounded-box flex h-14 items-center justify-center bg-base-300 text-lg">
@@ -97,7 +104,11 @@ export const App = () => {
                 return (
                   <Q.li class="mt-2 " key={routeInfo.to}>
                     {/* TODO: <Q as={Link} /> */}
-                    <Link className={clsx("rounded-lg", isActive && "ds-active")} to={routeInfo.to}>
+                    <Link
+                      className={clsx("rounded-lg", isActive && "ds-active")}
+                      to={routeInfo.to}
+                      onClick={onClickLink}
+                    >
                       {routeInfo.title}
                     </Link>
                   </Q.li>
