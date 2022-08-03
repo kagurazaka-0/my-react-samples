@@ -1,9 +1,12 @@
-import { atom, selector } from "recoil"
+import { atom, selector, useRecoilState, useRecoilValue } from "recoil"
 
-export const countState = atom({
+const countState = atom({
   key: "countState",
   default: 0,
 })
+
+export const useCountState = () => useRecoilState(countState)
+export const useCountStateValue = () => useRecoilValue(countState)
 
 export const countPlus1State = selector({
   key: "countPlus1State",
@@ -11,3 +14,5 @@ export const countPlus1State = selector({
     return get(countState) + 1
   },
 })
+
+export const useCountPlus1StateValue = () => useRecoilValue(countPlus1State)

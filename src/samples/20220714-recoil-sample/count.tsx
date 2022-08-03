@@ -1,12 +1,10 @@
-import { useRecoilState, useRecoilValue } from "recoil"
-
 import { Q } from "~/_common/Q"
 
-import { countPlus1State, countState } from "./state/count"
+import { useCountPlus1StateValue, useCountState } from "./state/count"
 
 export default function Page() {
-  const [count, setCount] = useRecoilState(countState)
-  const countPlus1 = useRecoilValue(countPlus1State)
+  const [count, setCount] = useCountState()
+  const countPlus1 = useCountPlus1StateValue()
 
   return (
     <div>
