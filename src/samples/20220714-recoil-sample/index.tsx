@@ -8,14 +8,18 @@ export default function Page() {
 
   return (
     <div>
-      <h2>recoil-sample</h2>
-      <p>countState = {count}</p>
-      <ul>
-        <li>
-          <Link to="./count">count</Link>
-          <Link to="./todo-list">todo-list</Link>
-        </li>
-      </ul>
+      <table className="ds-table w-full border-2">
+        <tbody>
+          <tr>
+            <td>countState</td>
+            <td>{count}</td>
+          </tr>
+        </tbody>
+      </table>
+      <Link className="ds-btn ds-btn-info ds-btn-block mt-4 transition-none" to="./count">
+        Count Page
+      </Link>
+      {/* <Link to="./todo-list">todo-list</Link> */}
     </div>
   )
 }
