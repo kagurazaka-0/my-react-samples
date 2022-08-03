@@ -1,4 +1,3 @@
-import { useDebugValue, useEffect, useRef } from "react"
 import { useForm } from "react-hook-form"
 
 import IconClose from "~icons/ant-design/close-outlined"
@@ -8,22 +7,7 @@ import { Q } from "~/_common/Q"
 import { Alert } from "~/_common/components/atoms/Alert"
 import { COLORS, useColorState } from "~/_common/daisyui/color-state"
 import { useBoolean } from "~/_common/hooks/useBoolean"
-
-function useWatch<T>(watchTarget: T, fn: (watchValue: T) => void) {
-  const isMountedRef = useRef(false)
-
-  useEffect(() => {
-    if (!isMountedRef.current) {
-      isMountedRef.current = true
-      return
-    }
-    fn(watchTarget)
-  }, [watchTarget])
-
-  if (IS_DEV) {
-    useDebugValue(watchTarget)
-  }
-}
+import { useWatch } from "~/_common/hooks/useWatch"
 
 export function SettingModal() {
   const [isOpenModal, { on: openModal, off: closeModal }] = useBoolean()
@@ -69,7 +53,7 @@ export function SettingModal() {
               保存しました
             </Alert>
           </Q.div>
-          <Q.span class="ds-btn ds-btn-ghost ds-btn-circle ds-btn-sm absolute right-4 top-4" onClick={onClickClose}>
+          <Q.span class="ds-btn ds-btn-circle ds-btn-ghost ds-btn-sm absolute right-4 top-4" onClick={onClickClose}>
             <IconClose />
           </Q.span>
           <Q.form class="ds-form-control py-4">
