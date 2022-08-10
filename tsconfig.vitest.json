@@ -1,9 +1,13 @@
 {
-  "extends": "./tsconfig.web.json",
+  // "extends": "./tsconfig.web.json",
   "compilerOptions": {
     "target": "ESNext",
     "useDefineForClassFields": true,
-    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "lib": [
+      "DOM",
+      "DOM.Iterable",
+      "ESNext"
+    ],
     "allowJs": false,
     "skipLibCheck": true,
     "esModuleInterop": false,
@@ -15,14 +19,23 @@
     "resolveJsonModule": true,
     "isolatedModules": false,
     "noEmit": true,
-    "jsx": "react-jsx",
+    "jsx": "react",
     "noUncheckedIndexedAccess": true,
     "baseUrl": "./src",
     "paths": {
-      "~/*": ["./*"]
+      "~/*": [
+        "./*"
+      ]
     },
-    "types": ["vitest/globals", "@testing-library/react"]
+    "types": [
+      "vitest/globals",
+      "@testing-library/react"
+    ]
   },
-  "include": ["src", "src/**/*.test.ts", "src/**/*.test.tsx"],
+  "include": [
+    "src",
+    "src/**/*.test.ts",
+    "src/**/*.test.tsx",
+  ],
   "references": []
 }
