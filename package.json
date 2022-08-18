@@ -11,7 +11,8 @@
     "generate-readme": "deno run -A ./scripts/generate-readme.ts",
     "test": "vitest",
     "tailwind-config-viewer": "tailwind-config-viewer",
-    "format": "prettier --write  ."
+    "format": "prettier --write .",
+    "new-sample": "deno run -A scripts/new-sample.ts"
   },
   "dependencies": {
     "change-case": "^4.1.2",
