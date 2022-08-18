@@ -32,7 +32,7 @@ for await (const item of Deno.readDir(TARGET_PATH)) {
     .catch(() => "")
 
   const path = `${PAGE_URL}/${item.name}/`
-  const readmeFilePath = `./src/samples/${item.name}/README.md`
+  const readmeFilePath = `./src/samples/${item.name}`
 
   const pageInfo = { title, description, path, readmeFilePath }
   logObject(pageInfo)
