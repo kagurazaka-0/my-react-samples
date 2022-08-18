@@ -6,8 +6,12 @@ const { COLORS } = require("./src/_common/daisyui/color.json")
 const myPlugin = plugin(({ addUtilities }) => {
   addUtilities({
     ".center": {
-      display: "grid",
-      "place-items": "center",
+      // display: "grid",
+      // "place-items": "center",
+      display: "flex",
+      "flex-direction": "column",
+      "justify-content": "center",
+      "align-items": "center",
     },
   })
 })
