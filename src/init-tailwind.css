@@ -1,3 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* TODO: 定義場所を見直す(styled-component?tailwind.config?) */
+.h-custom-screen {
+  height: calc(100vh - 120px);
+}
