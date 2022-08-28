@@ -24,4 +24,5 @@ ${description}
 
 `)
 
-exec(`npx prettier --write ${dirPath} && npm run generate-readme`)
+await exec(`npx prettier --write ${dirPath}`)
+await exec(`npm run generate-readme`)
