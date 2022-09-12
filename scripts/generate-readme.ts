@@ -1,6 +1,7 @@
 // TODO:GitHub Actionsで自動化する
-
 import { join } from "https://deno.land/std@0.142.0/path/mod.ts"
+
+import { TITLE_REGEX } from "../src-common/title-regex.ts"
 
 const PAGE_URL = "https://kagurazaka-0.github.io/my-react-samples"
 const TARGET_PATH = "./src/samples"
@@ -22,9 +23,9 @@ type PageInfo = {
 const pageInfos: PageInfo[] = []
 
 for await (const item of Deno.readDir(TARGET_PATH)) {
-  if (item.name === "index.tsx") continue
+  if (item.name === "index.tsx" || item.name.startsWith("_")) continue
 
-  const title = item.name.replace(/^\d+-/, "")
+  const title = item.name.replace(TITLE_REGEX, "")
 
   const markdownPath = join(TARGET_PATH, item.name, `README.md`)
   const description = await Deno.readTextFile(markdownPath)

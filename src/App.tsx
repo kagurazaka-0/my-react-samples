@@ -9,6 +9,7 @@ import IconList from "~icons/bi/list"
 import IconReact from "~icons/simple-icons/react"
 
 import { Q } from "~/_common/Q"
+import { TITLE_REGEX } from "~common/title-regex"
 import ROUTES from "~react-pages"
 
 import { SettingModal } from "./SettingModal"
@@ -16,9 +17,9 @@ import { useColorStateValue } from "./_common/daisyui/color-state"
 import { useTitleState } from "./_common/title-state"
 
 const ROUTE_INFOS = ROUTES.map(({ path }) => {
-  path = path ?? ""
+  path ??= ""
   /** 画面上部や左のドロワーに表示するタイトル */
-  const title = path === "/" ? "Welcome Page" : capitalCase(path.replace(/^\d+-/, ""))
+  const title = path === "/" ? "Welcome Page" : capitalCase(path.replace(TITLE_REGEX, ""))
 
   const to = path.startsWith("/") ? path : `/${path}`
 
@@ -51,13 +52,14 @@ export function App() {
 
   // ページ遷移時、タイトルを更新
   useEffect(() => {
-    const maybeTitle = ROUTE_INFOS.find((it) => it.isActive(routerLocation.pathname))?.title
-    if (!maybeTitle) {
-      console.warn('⚠️  maybeTitle is `"" | undefined`.', { maybeTitle })
+    const maybeRouteInfo = ROUTE_INFOS.find((it) => it.isActive(routerLocation.pathname))
+    if (!maybeRouteInfo) {
+      console.warn("⚠️  maybeRouteInfo is invalid.", { maybeRouteInfo })
       return
     }
-    setTitle(maybeTitle)
-    document.title = `${maybeTitle} - my-react-app`
+    const { title } = maybeRouteInfo
+    setTitle(title)
+    document.title = `${title} - my-react-app`
   }, [routerLocation.pathname])
 
   return (

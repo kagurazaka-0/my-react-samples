@@ -24,11 +24,16 @@
     "paths": {
       "~/*": [
         "./*"
+      ],
+      "~common/*": [
+        "../src-common/*"
       ]
-    }
+    },
+    "moduleDetection": "force"
   },
   "include": [
-    "src"
+    "src",
+    "src-common/*"
   ],
   "exclude": [
     "src/**/*.test.ts",
