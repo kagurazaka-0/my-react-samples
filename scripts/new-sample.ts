@@ -1,7 +1,7 @@
 import format from "https://deno.land/x/date_fns@v2.22.1/format/index.js"
 import { exec } from "https://raw.githubusercontent.com/kagurazaka-0/deno-scripts/main/utils/exec.ts"
 
-const name = prompt("sample name?")
+const name = Deno.args[0] ?? prompt("sample name?")
 if (!name) {
   console.warn("⚠️  name is empty.")
   Deno.exit(1)
