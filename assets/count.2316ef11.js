@@ -1,1 +1,0 @@
-import{R as n,a as u,b as e,c as a}from"./index.d8552539.js";const t=n({key:"countState",default:0}),l=()=>u(t),i=()=>e(t),s=a({key:"countPlus1State",get:({get:o})=>o(t)+1}),_=()=>e(s);export{s as countPlus1State,_ as useCountPlus1StateValue,l as useCountState,i as useCountStateValue};
