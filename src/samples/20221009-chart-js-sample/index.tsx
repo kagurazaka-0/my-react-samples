@@ -1,26 +1,18 @@
-import {
-  ArcElement,
-  BarElement,
-  CategoryScale,
-  Chart,
-  ChartDataset,
-  ChartOptions,
-  LinearScale,
-  LineElement,
-  PointElement,
-} from "chart.js"
+import type { ChartDataset, ChartOptions } from "chart.js"
+import * as ChartJs from "chart.js"
 import { Bar, Doughnut } from "react-chartjs-2"
 
-Chart.register(
+ChartJs.Chart.register(
   // Doughnut
-  ArcElement,
+  ChartJs.ArcElement,
   // Line
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
+  ChartJs.CategoryScale,
+  ChartJs.LinearScale,
+  ChartJs.PointElement,
+  ChartJs.LineElement,
+  ChartJs.LineController,
   // Bar
-  BarElement
+  ChartJs.BarElement
 )
 
 const BAR_OPTION: ChartOptions<"bar"> = {
