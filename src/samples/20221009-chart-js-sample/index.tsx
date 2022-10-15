@@ -12,7 +12,7 @@ ChartJs.Chart.register(
   ChartJs.LineElement,
   ChartJs.LineController,
   // Bar
-  ChartJs.BarElement
+  ChartJs.BarElement,
 )
 
 const BAR_OPTION: ChartOptions<"bar"> = {

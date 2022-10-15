@@ -39,4 +39,5 @@ module.exports = {
   arrowParens: "always",
   importOrder: ["^~icons", "^[~/]", "^[../]", "^[./]"],
   importOrderSeparation: true,
+  trailingComma: "all",
 }
