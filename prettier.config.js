@@ -1,6 +1,4 @@
-///@ts-check
-
-const pluginSortImports = require("@trivago/prettier-plugin-sort-imports")
+const pluginSortImports = require("@ianvs/prettier-plugin-sort-imports")
 const pluginOrganizeImports = require("prettier-plugin-organize-imports")
 const pluginTailwindcss = require("prettier-plugin-tailwindcss")
 
@@ -16,7 +14,7 @@ const myPlugin = {
         let it = text
         try {
           it = pluginOrganizeImports.parsers?.typescript.preprocess?.(it, options) ?? it
-          it = pluginSortImports.parsers.typescript.preprocess(it, options)
+          it = pluginSortImports.parsers?.typescript.preprocess(it, options)
         } catch (error) {
           console.warn(`⚠️ plugin error`, error)
         }
