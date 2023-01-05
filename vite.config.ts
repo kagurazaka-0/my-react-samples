@@ -13,7 +13,7 @@ export default defineConfig(({ command, mode }) => ({
     }),
     react(),
     pages({
-      dirs: "src/samples",
+      dirs: ["src/samples/other", "src/samples/2022"],
     }),
     icons({
       compiler: "jsx",

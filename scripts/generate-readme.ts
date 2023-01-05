@@ -1,4 +1,5 @@
 // TODO:GitHub Actionsで自動化する
+import { walk } from "https://deno.land/std@0.127.0/fs/walk.ts"
 import { join } from "https://deno.land/std@0.142.0/path/mod.ts"
 
 import { TITLE_REGEX } from "../src-common/title-regex.ts"
@@ -22,12 +23,30 @@ type PageInfo = {
 }
 const pageInfos: PageInfo[] = []
 
-for await (const item of Deno.readDir(TARGET_PATH)) {
-  if (item.name === "index.tsx" || item.name.startsWith("_")) continue
+async function hasFile(path: string | URL) {
+  try {
+    await Deno.readFile(path)
+    return true
+  } catch (error) {
+    return false
+  }
+}
+
+for await (const item of walk(TARGET_PATH)) {
+  const isTarget = /^_?\d{6}/.test(item.name)
+  if (!isTarget) continue
+
+  console.group(item.name)
+  const result = await hasFile(`${item.path}/index.tsx`)
+  console.log(result)
+
+  if (!result) continue
+
+  logObject(item)
 
   const title = item.name.replace(TITLE_REGEX, "")
 
-  const markdownPath = join(TARGET_PATH, item.name, `README.md`)
+  const markdownPath = join(item.path, `README.md`)
   const description = await Deno.readTextFile(markdownPath)
     .then((markdownText) => markdownText.split("\n")[2] ?? "")
     .catch(() => "")
@@ -37,7 +56,13 @@ for await (const item of Deno.readDir(TARGET_PATH)) {
 
   const pageInfo = { title, description, path, readmeFilePath }
   logObject(pageInfo)
+  console.groupEnd()
   pageInfos.push(pageInfo)
+}
+
+if (pageInfos.length === 0) {
+  console.log("pageInfos is empty.")
+  Deno.exit(0)
 }
 
 const markdownTableValueText = pageInfos

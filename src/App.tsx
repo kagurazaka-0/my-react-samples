@@ -1,45 +1,25 @@
-import { capitalCase } from "change-case"
 import clsx from "clsx"
-import { PropsWithChildren, Suspense, useEffect } from "react"
+import { PropsWithChildren, Suspense, useEffect, useMemo } from "react"
 import { useForm } from "react-hook-form"
 import { Link, useLocation, useRoutes } from "react-router-dom"
 import { RecoilRoot } from "recoil"
 
+import IconGithub from "~icons/ant-design/github-outlined"
 import IconList from "~icons/bi/list"
 import IconReact from "~icons/simple-icons/react"
 
 import { Q } from "~/_common/Q"
-import { TITLE_REGEX } from "~common/title-regex"
 import ROUTES from "~react-pages"
 
 import { SettingModal } from "./SettingModal"
 import { useColorStateValue } from "./_common/daisyui/color-state"
 import { useTitleState } from "./_common/title-state"
-
-const ROUTE_INFOS = ROUTES.map(({ path }) => {
-  path ??= ""
-  /** 画面上部や左のドロワーに表示するタイトル */
-  const title = path === "/" ? "Welcome Page" : capitalCase(path.replace(TITLE_REGEX, ""))
-
-  const to = path.startsWith("/") ? path : `/${path}`
-
-  const isActive = (path: string) => {
-    if (to === "/") {
-      return path === "/"
-    } else {
-      return path.includes(to)
-    }
-  }
-
-  return { title, to, isActive }
-}).sort((a, b) => {
-  // Welcomeを一番上に、それ以外は日付順(toの辞書並び順)
-  if (a.to === "/" || b.to === "/") return 1
-  return a.to < b.to ? 1 : -1
-})
+import { getGitHubSourceUrl } from "./_common/utils/getGitHubSourceUrl"
+import { ROUTE_INFOS } from "./_constants"
 
 export function App() {
   const routerLocation = useLocation()
+  const { pathname } = routerLocation
 
   const color = useColorStateValue()
   const [title, setTitle] = useTitleState()
@@ -50,17 +30,30 @@ export function App() {
     setValue("isOpenDrawer", false)
   }
 
-  // ページ遷移時、タイトルを更新
-  useEffect(() => {
-    const maybeRouteInfo = ROUTE_INFOS.find((it) => it.isActive(routerLocation.pathname))
+  const currentRouteInfo = useMemo(() => {
+    const maybeRouteInfo = ROUTE_INFOS.find((it) => it.isActive(pathname))
     if (!maybeRouteInfo) {
-      console.warn("⚠️  maybeRouteInfo is invalid.", { maybeRouteInfo })
+      console.warn("⚠️  404", { pathname })
+      return { isNotFound: true as const }
+    }
+    const sourceUrl =
+      maybeRouteInfo.to === "/" ? undefined : getGitHubSourceUrl(`/src/samples/2022/${maybeRouteInfo.to}/index.tsx`)
+
+    return {
+      ...maybeRouteInfo,
+      isNotFound: false as const,
+      sourceUrl,
+    }
+  }, [pathname])
+
+  useEffect(() => {
+    if (currentRouteInfo.isNotFound) {
       return
     }
-    const { title } = maybeRouteInfo
+    const { title } = currentRouteInfo
     setTitle(title)
     document.title = `${title} - my-react-app`
-  }, [routerLocation.pathname])
+  }, [currentRouteInfo])
 
   return (
     <Contexts>
@@ -70,15 +63,21 @@ export function App() {
           {/* ヘッダー */}
           <Q.div class="sticky top-4 left-0 m-4 mt-0">
             <Q.div class="ds-navbar rounded-box bg-base-100 bg-opacity-60 shadow-xl backdrop-blur">
-              <Q.div class="flex-none">
-                <Q.label htmlFor="toggle-drawer" class="ds-btn ds-btn-ghost ds-btn-square">
+              <Q.div class="flex-0">
+                <Q.label htmlFor="toggle-drawer" class="ds-btn-ghost ds-btn-square ds-btn">
                   <IconList className="h-6 w-6" />
                 </Q.label>
               </Q.div>
               <Q.div class="flex-1" />
               <Q.div class="text-center text-xl font-semibold">{title}</Q.div>
               <Q.div class="flex-1" />
-              <Q.div class="flex-0 w-12" />
+              <Q.div class="flex-0 w-12">
+                {!currentRouteInfo.isNotFound && currentRouteInfo.sourceUrl && (
+                  <Q.a href={currentRouteInfo.sourceUrl} target="_blank" class="ds-btn-ghost ds-btn-square ds-btn">
+                    <IconGithub className="h-6 w-6" />
+                  </Q.a>
+                )}
+              </Q.div>
             </Q.div>
           </Q.div>
 
@@ -102,7 +101,7 @@ export function App() {
 
             <Q.ul class="ds-menu mt-2">
               {ROUTE_INFOS.map((routeInfo) => {
-                const isActive = routeInfo.isActive(routerLocation.pathname)
+                const isActive = routeInfo.isActive(pathname)
                 return (
                   <Q.li class="mt-2 " key={routeInfo.to}>
                     {/* TODO: <Q as={Link} /> */}
