@@ -1,1 +1,0 @@
-import{R as i,b as s,d as n,c as d}from"./index-55816554.js";const t=i({key:"todoListState",default:[{title:"ひき肉買う"},{title:"〇〇さんからのSlack確認する"},{title:"〇〇の修正対応する",isDone:!0}]}),x=()=>s(t),a=n({key:"todoListTextState",get:({get:o})=>`未完了: ${o(t).filter(({isDone:e})=>!e).length}件`}),L=()=>d(a);export{x as useTodoListState,L as useTodoListTextStateValue};
