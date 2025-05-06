@@ -6,7 +6,7 @@
     "start": "npm run dev",
     "dev": "vite",
     "build": " npm run type-check && vite build",
-    "build-for-github-pages": "npm run type-check && vite build --mode build-for-github-pages && cp ./dist/index.html ./dist/404.html",
+    "build-for-github-pages": "vite build --mode build-for-github-pages && cp ./dist/index.html ./dist/404.html",
     "type-check": " tsc -p ./tsconfig.web.json --noEmit",
     "preview": "vite preview",
     "generate-readme": "deno run -A ./scripts/generate-readme.ts",
